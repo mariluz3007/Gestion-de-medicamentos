@@ -1,0 +1,555 @@
+/* =========================
+   COLORES
+========================= */
+
+:host {
+  --azul-principal: #4d82bc;
+  --azul-pastel: #84b6f4;
+  --azul-claro: #c4dafa;
+  --blanco: #e2e8f3;
+  --texto: #334155;
+  --texto-suave: #64748b;
+}
+
+
+/* =========================
+   FONDO GENERAL
+========================= */
+
+ion-content {
+  --background: #e2e8f3;
+}
+
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 25px 20px 40px;
+  background: #e2e8f3;
+}
+
+
+/* =========================
+   HEADER DE LA PÁGINA
+========================= */
+
+.page-header {
+  background: #4d82bc;
+
+  padding: 28px;
+  border-radius: 18px;
+  margin-bottom: 25px;
+
+  box-shadow: 0 5px 15px rgba(77, 130, 188, 0.15);
+
+  h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 8px 0 0;
+    color: #ffffff;
+    opacity: 0.9;
+    font-size: 15px;
+  }
+}
+
+
+/* =========================
+   TARJETAS CRUD
+========================= */
+
+ion-grid {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.crud-card {
+  background: #ffffff;
+
+  border: 2px solid #c4dafa;
+  border-radius: 18px;
+
+  padding: 20px 15px;
+  min-height: 150px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  box-shadow: 0 4px 12px rgba(77, 130, 188, 0.08);
+
+  transition: all 0.2s ease;
+}
+
+.crud-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #84b6f4;
+
+  box-shadow: 0 8px 20px rgba(77, 130, 188, 0.15);
+}
+
+.crud-card:active {
+  transform: scale(0.97);
+}
+
+.crud-icon {
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+
+  background: #c4dafa;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 10px;
+}
+
+.crud-icon ion-icon {
+  font-size: 28px;
+  color: #4d82bc;
+}
+
+.crud-card h3 {
+  margin: 5px 0;
+
+  color: #4d82bc;
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.crud-card p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   BUSCADOR
+========================= */
+
+ion-searchbar {
+  --background: #ffffff;
+  --border-radius: 14px;
+
+  --color: #334155;
+  --placeholder-color: #94a3b8;
+
+  --box-shadow: 0 3px 12px rgba(77, 130, 188, 0.08);
+
+  border: 1px solid #c4dafa;
+
+  border-radius: 14px;
+
+  padding: 0;
+
+  margin: 15px 0 25px;
+}
+
+
+/* =========================
+   FORMULARIO
+========================= */
+
+ion-card {
+  background: #ffffff;
+
+  margin: 0 0 30px;
+
+  border-radius: 18px;
+
+  border: 1px solid #c4dafa;
+
+  box-shadow: 0 6px 20px rgba(77, 130, 188, 0.10);
+
+  overflow: hidden;
+}
+
+ion-card-header {
+  background: #c4dafa;
+
+  padding: 20px;
+}
+
+ion-card-title {
+  color: #4d82bc;
+
+  font-size: 21px;
+  font-weight: 700;
+}
+
+ion-card-content {
+  background: #ffffff;
+  padding: 20px;
+}
+
+ion-item {
+  --background: #ffffff;
+  --border-color: #c4dafa;
+
+  margin-bottom: 8px;
+}
+
+ion-input,
+ion-textarea {
+  --color: #334155;
+  --placeholder-color: #94a3b8;
+}
+
+ion-checkbox {
+  --checkbox-background-checked: #4d82bc;
+  --border-color-checked: #4d82bc;
+}
+
+
+/* =========================
+   BOTONES DEL FORMULARIO
+========================= */
+
+.form-buttons {
+  margin-top: 25px;
+}
+
+.form-buttons ion-button {
+  --border-radius: 12px;
+
+  height: 48px;
+
+  margin-top: 10px;
+
+  font-weight: 600;
+}
+
+.form-buttons ion-button:first-child {
+  --background: #4d82bc;
+  --background-hover: #84b6f4;
+  --color: #ffffff;
+}
+
+.form-buttons ion-button[color="medium"] {
+  --color: #4d82bc;
+  --border-color: #84b6f4;
+}
+
+
+/* =========================
+   CABECERA DEL LISTADO
+========================= */
+
+.list-header {
+  margin: 15px 0;
+
+  padding-bottom: 10px;
+
+  border-bottom: 2px solid #c4dafa;
+}
+
+.list-header h2 {
+  margin: 0;
+
+  color: #4d82bc;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   LISTA
+========================= */
+
+ion-list {
+  background: #ffffff;
+
+  padding: 0;
+}
+
+ion-list ion-item {
+  --background: #ffffff;
+
+  border: 1px solid #c4dafa;
+
+  border-radius: 16px;
+
+  margin-bottom: 12px;
+
+  padding: 8px 5px;
+
+  box-shadow: 0 3px 10px rgba(77, 130, 188, 0.06);
+
+  transition: all 0.2s ease;
+}
+
+ion-list ion-item:hover {
+  border-color: #84b6f4;
+
+  box-shadow: 0 6px 16px rgba(77, 130, 188, 0.12);
+}
+
+
+/* =========================
+   MEDICAMENTO SELECCIONADO
+========================= */
+
+ion-list ion-item.selected {
+  --background: #c4dafa;
+
+  border: 2px solid #84b6f4;
+
+  box-shadow: 0 5px 15px rgba(77, 130, 188, 0.15);
+}
+
+
+/* =========================
+   INFORMACIÓN MEDICAMENTO
+========================= */
+
+ion-item ion-label {
+  padding: 10px 5px;
+}
+
+ion-item h2 {
+  color: #4d82bc;
+
+  font-size: 19px;
+
+  font-weight: 700;
+
+  margin-bottom: 8px;
+}
+
+ion-item p {
+  color: #64748b;
+
+  font-size: 14px;
+
+  margin: 5px 0;
+
+  line-height: 1.4;
+}
+
+ion-item p strong {
+  color: #334155;
+}
+
+
+/* =========================
+   BOTONES EDITAR / ELIMINAR
+========================= */
+
+ion-item > ion-button {
+  --border-radius: 10px;
+
+  margin: 0 2px;
+}
+
+ion-item > ion-button[color="primary"] {
+  --color: #4d82bc;
+}
+
+ion-item > ion-button[color="danger"] {
+  --color: #d47777;
+}
+
+ion-item > ion-button ion-icon {
+  font-size: 22px;
+}
+
+
+/* =========================
+   PAGINACIÓN
+========================= */
+
+.pagination-container {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 25px;
+  margin-bottom: 20px;
+
+  width: 100%;
+}
+
+.pagination-container ion-button {
+  --background: #ffffff;
+  --color: #4d82bc;
+
+  --border-color: #84b6f4;
+
+  --border-width: 1px;
+  --border-style: solid;
+
+  --border-radius: 10px;
+
+  min-width: 42px;
+  height: 42px;
+
+  margin: 0;
+}
+
+.pagination-container ion-button.active {
+  --background: #4d82bc;
+  --color: #ffffff;
+
+  --border-color: #4d82bc;
+}
+
+.pagination-container ion-button:hover {
+  --background: #c4dafa;
+}
+
+.pagination-container ion-button[disabled] {
+  opacity: 0.45;
+}
+
+
+/* =========================
+   TEXTO DE PAGINACIÓN
+========================= */
+
+.pagination-info {
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 14px;
+
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+
+/* =========================
+   SIN RESULTADOS
+========================= */
+
+.empty-message {
+  background: #ffffff;
+
+  border: 2px dashed #84b6f4;
+
+  border-radius: 18px;
+
+  padding: 40px 20px;
+
+  text-align: center;
+
+  margin-top: 20px;
+}
+
+.empty-message ion-icon {
+  font-size: 55px;
+
+  color: #84b6f4;
+
+  margin-bottom: 10px;
+}
+
+.empty-message p {
+  color: #64748b;
+
+  margin: 0;
+
+  font-size: 15px;
+}
+
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.main-toolbar {
+  --background: #4d82bc;
+  --color: #ffffff;
+
+  --border-width: 0;
+}
+
+.main-toolbar ion-title {
+  font-weight: 700;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 576px) {
+
+  .main-container {
+    padding: 18px 12px 30px;
+  }
+
+  .page-header {
+    padding: 22px;
+
+    border-radius: 16px;
+  }
+
+  .page-header h1 {
+    font-size: 25px;
+  }
+
+  .crud-card {
+    min-height: 135px;
+
+    padding: 15px 10px;
+  }
+
+  .crud-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .crud-icon ion-icon {
+    font-size: 24px;
+  }
+
+  .crud-card h3 {
+    font-size: 15px;
+  }
+
+  .crud-card p {
+    font-size: 12px;
+  }
+
+  .list-header h2 {
+    font-size: 20px;
+  }
+
+  ion-item h2 {
+    font-size: 17px;
+  }
+
+  ion-item p {
+    font-size: 13px;
+  }
+
+  .pagination-container {
+    gap: 4px;
+  }
+
+  .pagination-container ion-button {
+    min-width: 38px;
+    height: 38px;
+  }
+}

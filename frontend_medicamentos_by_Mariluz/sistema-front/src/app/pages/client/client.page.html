@@ -1,0 +1,178 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary" class="premium-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="fw-bold">Gestión de Clientes</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="OptionClient('i', 0)">
+        <ion-icon slot="start" name="add-circle"></ion-icon>
+        Nuevo
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light" class="main-content">
+  <div class="content-wrapper">
+    <!-- Buscador -->
+    <div class="search-container">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="12" size-md="8">
+          <ion-searchbar class="custom-searchbar" mode="ios" placeholder="Buscar clientes por nombre o cédula..." (ionInput)="onValueChangeSearch($event)" (keyup.enter)="SearchClientes()"></ion-searchbar>
+        </ion-col>
+        <ion-col size="12" size-md="4" class="ion-text-end action-buttons">
+          <ion-button shape="round" class="btn-shadow" (click)="SearchClientes()" color="primary">
+            <ion-icon slot="start" name="search"></ion-icon>
+            Buscar
+          </ion-button>
+          <ion-button shape="round" fill="clear" (click)="resetSearch()" color="medium">
+            Limpiar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <!-- Lista de Clientes usando @for y @if -->
+    @if (ListClientes && ListClientes.length > 0) {
+      <ion-grid>
+        <ion-row>
+          @for (item of ListClientes; track item.id) {
+            <ion-col size="12" size-md="6" size-lg="4">
+              <div class="premium-client-card">
+                <div class="card-header">
+                  <div class="avatar bg-primary-light">
+                    <ion-icon name="person" color="primary"></ion-icon>
+                  </div>
+                  <div class="header-info">
+                    <h3 class="client-name"> </h3>
+                    <span class="badge badge-outline">Céd: </span>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="info-row">
+                    <ion-icon name="call-outline" color="medium"></ion-icon>
+                    <span></span>
+                  </div>
+                  <div class="info-row">
+                    <ion-icon name="document-text-outline" color="medium"></ion-icon>
+                    <span>RNC: </span>
+                  </div>
+                </div>
+                <div class="card-actions">
+                  <ion-button fill="clear" color="tertiary" (click)="OptionClient('v', item.id)" title="Ver Datos">
+                    <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" color="warning" (click)="OptionClient('u', item.id)" title="Editar Cliente">
+                    <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" color="danger" (click)="presentDeleteConfirm(item.id)" title="Eliminar Cliente">
+                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+            </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
+    } @else {
+      <!-- Mensaje si no hay datos -->
+      <div class="empty-state">
+        <ion-icon name="folder-open-outline" class="empty-icon"></ion-icon>
+        <h3>No se encontraron clientes</h3>
+        <p>Intenta realizar otra búsqueda o registra un nuevo cliente.</p>
+        <ion-button shape="round" color="primary" class="ion-margin-top" (click)="OptionClient('i', 0)">
+          Registrar Cliente
+        </ion-button>
+      </div>
+    }
+
+    <!-- Paginación -->
+    @if (maxPages && maxPages.length > 0) {
+      <div class="pagination-container">
+        <ion-button shape="round" fill="outline" [disabled]="!previous" (click)="buttonPrevious()">
+          <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+          Ant
+        </ion-button>
+        
+        <span class="page-indicator">Página  de </span>
+
+        <ion-button shape="round" fill="outline" [disabled]="!next" (click)="buttonNext()">
+          Sig
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+    }
+  </div>
+
+  <!-- Modal para Crear/Editar/Ver Cliente -->
+  <ion-modal #modalCliente class="premium-modal">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar color="primary" class="premium-toolbar">
+          <ion-title class="fw-bold"></ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeModalCliente()">
+              <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="modal-content">
+        <div class="form-container">
+          <ion-list lines="none">
+            <div class="input-group">
+              <ion-item class="custom-input">
+                <ion-icon name="person-outline" slot="start" color="medium"></ion-icon>
+                <ion-input label="Nombre" labelPlacement="floating" [(ngModel)]="cliente.nombre" [readonly]="!visibleButton"></ion-input>
+              </ion-item>
+              
+              <ion-item class="custom-input">
+                <ion-icon name="person-outline" slot="start" color="medium"></ion-icon>
+                <ion-input label="Apellido" labelPlacement="floating" [(ngModel)]="cliente.apellido" [readonly]="!visibleButton"></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="input-group">
+              <ion-item class="custom-input">
+                <ion-icon name="card-outline" slot="start" color="medium"></ion-icon>
+                <ion-input label="Cédula" labelPlacement="floating" [(ngModel)]="cliente.cedula" [readonly]="!visibleButton"></ion-input>
+              </ion-item>
+              
+              <ion-item class="custom-input">
+                <ion-icon name="call-outline" slot="start" color="medium"></ion-icon>
+                <ion-input label="Teléfono" labelPlacement="floating" [(ngModel)]="cliente.telefono" [readonly]="!visibleButton"></ion-input>
+              </ion-item>
+            </div>
+
+            <ion-item class="custom-input">
+              <ion-icon name="location-outline" slot="start" color="medium"></ion-icon>
+              <ion-input label="Dirección" labelPlacement="floating" [(ngModel)]="cliente.direccion" [readonly]="!visibleButton"></ion-input>
+            </ion-item>
+
+            <div class="input-group">
+              <ion-item class="custom-input">
+                <ion-icon name="document-text-outline" slot="start" color="medium"></ion-icon>
+                <ion-input label="RNC" labelPlacement="floating" [(ngModel)]="cliente.rnc" [readonly]="!visibleButton"></ion-input>
+              </ion-item>
+              
+              <ion-item class="custom-input">
+                <ion-icon name="cash-outline" slot="start" color="medium"></ion-icon>
+                <ion-input type="number" label="Ingresos" labelPlacement="floating" [(ngModel)]="cliente.ingresos" [readonly]="!visibleButton"></ion-input>
+              </ion-item>
+            </div>
+          </ion-list>
+          
+          @if (visibleButton) {
+            <div class="ion-margin-top ion-text-center">
+              <ion-button shape="round" expand="block" size="large" (click)="FunctionCliente()" color="primary" class="btn-shadow">
+                <ion-icon slot="start" [name]="iconName"></ion-icon>
+                
+              </ion-button>
+            </div>
+          }
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

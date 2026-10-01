@@ -1,0 +1,538 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="main-toolbar">
+    <ion-title>Gestión de Medicamentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" color="light">
+
+  <div class="main-container">
+
+    <!-- ========================= -->
+    <!-- ENCABEZADO -->
+    <!-- ========================= -->
+
+    <div class="page-header">
+
+      <h1>Medicamentos</h1>
+
+      <p>
+        Administra los medicamentos registrados en el sistema
+      </p>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- MENÚ CRUD -->
+    <!-- ========================= -->
+
+    <ion-grid>
+
+      <ion-row>
+
+        <!-- NUEVO -->
+
+        <ion-col size="6" size-md="3">
+
+          <div
+            class="crud-card"
+            (click)="nuevoMedicamento()"
+          >
+
+            <div class="crud-icon">
+
+              <ion-icon
+                name="add-circle-outline"
+              ></ion-icon>
+
+            </div>
+
+            <h3>Nuevo</h3>
+
+            <p>
+              Registrar medicamento
+            </p>
+
+          </div>
+
+        </ion-col>
+
+
+        <!-- EDITAR -->
+
+        <ion-col size="6" size-md="3">
+
+          <div
+            class="crud-card"
+            (click)="editarMedicamento(medicamentoSeleccionado || undefined)"
+          >
+
+            <div class="crud-icon">
+
+              <ion-icon
+                name="create-outline"
+              ></ion-icon>
+
+            </div>
+
+            <h3>Editar</h3>
+
+            <p>
+              Modificar medicamento
+            </p>
+
+          </div>
+
+        </ion-col>
+
+
+        <!-- ELIMINAR -->
+
+        <ion-col size="6" size-md="3">
+
+          <div
+            class="crud-card"
+            (click)="eliminarMedicamento(medicamentoSeleccionado || undefined)"
+          >
+
+            <div class="crud-icon">
+
+              <ion-icon
+                name="trash-outline"
+              ></ion-icon>
+
+            </div>
+
+            <h3>Eliminar</h3>
+
+            <p>
+              Eliminar medicamento
+            </p>
+
+          </div>
+
+        </ion-col>
+
+
+        <!-- BUSCAR -->
+
+        <ion-col size="6" size-md="3">
+
+          <div
+            class="crud-card"
+            (click)="buscarMedicamento()"
+          >
+
+            <div class="crud-icon">
+
+              <ion-icon
+                name="search-outline"
+              ></ion-icon>
+
+            </div>
+
+            <h3>Buscar</h3>
+
+            <p>
+              Buscar medicamento
+            </p>
+
+          </div>
+
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+
+
+    <!-- ========================= -->
+    <!-- BUSCADOR -->
+    <!-- ========================= -->
+
+    <ion-searchbar
+      [(ngModel)]="terminoBusqueda"
+      (ionInput)="buscarMedicamento()"
+      placeholder="Buscar por nombre o laboratorio"
+    >
+    </ion-searchbar>
+
+
+    <!-- ========================= -->
+    <!-- FORMULARIO -->
+    <!-- ========================= -->
+
+    <ion-card *ngIf="mostrarFormulario">
+
+      <ion-card-header>
+
+        <ion-card-title>
+
+          {{ modoEdicion
+            ? 'Editar medicamento'
+            : 'Nuevo medicamento'
+          }}
+
+        </ion-card-title>
+
+      </ion-card-header>
+
+
+      <ion-card-content>
+
+        <ion-item>
+
+          <ion-input
+            label="Nombre"
+            labelPlacement="stacked"
+            [(ngModel)]="formulario.nombre"
+            placeholder="Nombre del medicamento"
+          >
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-textarea
+            label="Descripción"
+            labelPlacement="stacked"
+            [(ngModel)]="formulario.descripcion"
+            placeholder="Descripción"
+          >
+          </ion-textarea>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-input
+            label="Laboratorio"
+            labelPlacement="stacked"
+            [(ngModel)]="formulario.laboratorio"
+            placeholder="Laboratorio"
+          >
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-input
+            type="number"
+            label="Precio"
+            labelPlacement="stacked"
+            [(ngModel)]="formulario.precio"
+          >
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-input
+            type="number"
+            label="Stock"
+            labelPlacement="stacked"
+            [(ngModel)]="formulario.stock"
+          >
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-input
+            type="date"
+            label="Fecha de vencimiento"
+            labelPlacement="stacked"
+            [(ngModel)]="formulario.fecha_vencimiento"
+          >
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-checkbox
+            [(ngModel)]="formulario.requiere_receta"
+          >
+
+            Requiere receta
+
+          </ion-checkbox>
+
+        </ion-item>
+
+
+        <!-- ========================= -->
+        <!-- BOTONES DEL FORMULARIO -->
+        <!-- ========================= -->
+
+        <div class="form-buttons">
+
+          <ion-button
+            expand="block"
+            (click)="guardarMedicamento()"
+          >
+
+            <ion-icon
+              slot="start"
+              name="save-outline"
+            ></ion-icon>
+
+            {{ modoEdicion
+              ? 'Actualizar'
+              : 'Guardar'
+            }}
+
+          </ion-button>
+
+
+          <ion-button
+            expand="block"
+            fill="outline"
+            color="medium"
+            (click)="cancelar()"
+          >
+
+            Cancelar
+
+          </ion-button>
+
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <!-- ========================= -->
+    <!-- LISTADO -->
+    <!-- ========================= -->
+
+    <div class="list-header">
+
+      <h2>
+        Medicamentos registrados
+      </h2>
+
+    </div>
+
+
+    <ion-list>
+
+      <!--
+        AQUÍ ESTÁ EL CAMBIO DE LA PAGINACIÓN
+
+        Antes:
+        *ngFor="let medicamento of medicamentos"
+
+        Ahora:
+        *ngFor="let medicamento of obtenerMedicamentosPagina()"
+      -->
+
+      <ion-item
+        *ngFor="let medicamento of obtenerMedicamentosPagina()"
+        [class.selected]="medicamentoSeleccionado?.id === medicamento.id"
+        (click)="seleccionarMedicamento(medicamento)"
+      >
+
+        <ion-label>
+
+          <h2>
+            {{ medicamento.nombre }}
+          </h2>
+
+
+          <p>
+            {{ medicamento.descripcion }}
+          </p>
+
+
+          <p>
+
+            <strong>
+              Laboratorio:
+            </strong>
+
+            {{ medicamento.laboratorio }}
+
+          </p>
+
+
+          <p>
+
+            <strong>
+              Precio:
+            </strong>
+
+            ${{ medicamento.precio }}
+
+          </p>
+
+
+          <p>
+
+            <strong>
+              Stock:
+            </strong>
+
+            {{ medicamento.stock }}
+
+          </p>
+
+
+          <p>
+
+            <strong>
+              Vencimiento:
+            </strong>
+
+            {{ medicamento.fecha_vencimiento }}
+
+          </p>
+
+
+          <p>
+
+            <strong>
+              Requiere receta:
+            </strong>
+
+            {{ medicamento.requiere_receta ? 'Sí' : 'No' }}
+
+          </p>
+
+        </ion-label>
+
+
+        <!-- ========================= -->
+        <!-- BOTÓN EDITAR -->
+        <!-- ========================= -->
+
+        <ion-button
+          slot="end"
+          fill="clear"
+          color="primary"
+          (click)="$event.stopPropagation(); editarMedicamento(medicamento)"
+        >
+
+          <ion-icon
+            name="create-outline"
+          ></ion-icon>
+
+        </ion-button>
+
+
+        <!-- ========================= -->
+        <!-- BOTÓN ELIMINAR -->
+        <!-- ========================= -->
+
+        <ion-button
+          slot="end"
+          fill="clear"
+          color="danger"
+          (click)="$event.stopPropagation(); eliminarMedicamento(medicamento)"
+        >
+
+          <ion-icon
+            name="trash-outline"
+          ></ion-icon>
+
+        </ion-button>
+
+      </ion-item>
+
+    </ion-list>
+
+
+    <!-- ========================= -->
+    <!-- SIN RESULTADOS -->
+    <!-- ========================= -->
+
+    <div
+      *ngIf="medicamentos.length === 0"
+      class="empty-message"
+    >
+
+      <ion-icon
+        name="medkit-outline"
+      ></ion-icon>
+
+      <p>
+        No hay medicamentos registrados.
+      </p>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- PAGINACIÓN -->
+    <!-- ========================= -->
+
+    <div
+      class="paginacion"
+      *ngIf="medicamentos.length > 0"
+    >
+
+      <!-- BOTÓN ANTERIOR -->
+
+      <ion-button
+        fill="outline"
+        (click)="paginaAnterior()"
+        [disabled]="paginaActual === 1"
+      >
+
+        <ion-icon
+          slot="start"
+          name="chevron-back-outline"
+        ></ion-icon>
+
+        Anterior
+
+      </ion-button>
+
+
+      <!-- INFORMACIÓN DE PÁGINA -->
+
+      <div class="pagina-info">
+
+        <strong>
+          Página {{ paginaActual }} de {{ totalPaginas }}
+        </strong>
+
+      </div>
+
+
+      <!-- BOTÓN SIGUIENTE -->
+
+      <ion-button
+        fill="outline"
+        (click)="paginaSiguiente()"
+        [disabled]="paginaActual === totalPaginas"
+      >
+
+        Siguiente
+
+        <ion-icon
+          slot="end"
+          name="chevron-forward-outline"
+        ></ion-icon>
+
+      </ion-button>
+
+    </div>
+
+
+  </div>
+
+</ion-content>

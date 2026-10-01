@@ -1,0 +1,247 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="main-toolbar">
+    <ion-title class="ion-text-center fw-bold">
+      Gestión de Medicamentos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="dashboard-content">
+
+  <!-- ========================= -->
+  <!-- HERO -->
+  <!-- ========================= -->
+
+  <div class="hero-section">
+
+    <div class="hero-content">
+
+      <h1 class="welcome-title">
+        Bienvenido
+      </h1>
+
+      <p class="welcome-subtitle">
+        Gestión integral de medicamentos
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- CONTENIDO PRINCIPAL -->
+  <!-- ========================= -->
+
+  <div class="main-container">
+
+    <h2 class="section-title">
+      Accesos Rápidos
+    </h2>
+
+
+    <ion-grid fixed>
+
+      <ion-row>
+
+
+        <!-- ========================= -->
+        <!-- MEDICAMENTOS -->
+        <!-- ========================= -->
+
+        <ion-col
+          size="12"
+          size-md="6"
+          size-lg="6"
+        >
+
+          <div
+            class="premium-card clickable card-medicamentos"
+            (click)="navigateTo('/medicamentos')"
+          >
+
+            <div class="card-icon-wrapper bg-primary-light">
+
+              <ion-icon name="medkit"></ion-icon>
+
+            </div>
+
+
+            <div class="card-info">
+
+              <h3>
+                Gestión de Medicamentos
+              </h3>
+
+              <p>
+                Registrar, editar, consultar y eliminar medicamentos
+              </p>
+
+            </div>
+
+
+            <ion-icon
+              name="chevron-forward"
+              class="arrow-icon"
+            ></ion-icon>
+
+          </div>
+
+        </ion-col>
+
+
+        <!-- ========================= -->
+        <!-- PRÉSTAMOS -->
+        <!-- ========================= -->
+
+        <ion-col
+          size="12"
+          size-md="6"
+          size-lg="6"
+        >
+
+          <div class="premium-card disabled-card card-prestamos">
+
+            <div class="card-icon-wrapper bg-secondary-light">
+
+              <ion-icon name="cash"></ion-icon>
+
+            </div>
+
+
+            <div class="card-info">
+
+              <h3>
+                Nuevos Préstamos
+              </h3>
+
+              <p>
+                Crear solicitudes y simulaciones
+              </p>
+
+            </div>
+
+
+            <ion-badge
+              class="badge-soon"
+            >
+              Próximamente
+            </ion-badge>
+
+          </div>
+
+        </ion-col>
+
+
+        <!-- ========================= -->
+        <!-- PAGOS -->
+        <!-- ========================= -->
+
+        <ion-col
+          size="12"
+          size-md="6"
+          size-lg="6"
+        >
+
+          <div class="premium-card disabled-card card-pagos">
+
+            <div class="card-icon-wrapper bg-tertiary-light">
+
+              <ion-icon name="wallet"></ion-icon>
+
+            </div>
+
+
+            <div class="card-info">
+
+              <h3>
+                Pagos y Cuotas
+              </h3>
+
+              <p>
+                Registrar cobros y amortizaciones
+              </p>
+
+            </div>
+
+
+            <ion-badge
+              class="badge-soon"
+            >
+              Próximamente
+            </ion-badge>
+
+          </div>
+
+        </ion-col>
+
+
+        <!-- ========================= -->
+        <!-- REPORTES -->
+        <!-- ========================= -->
+
+        <ion-col
+          size="12"
+          size-md="6"
+          size-lg="6"
+        >
+
+          <div class="premium-card disabled-card card-reportes">
+
+            <div class="card-icon-wrapper bg-reportes-light">
+
+              <ion-icon name="pie-chart"></ion-icon>
+
+            </div>
+
+
+            <div class="card-info">
+
+              <h3>
+                Reportes
+              </h3>
+
+              <p>
+                Estadísticas y balance general
+              </p>
+
+            </div>
+
+
+            <ion-badge
+              class="badge-soon"
+            >
+              Próximamente
+            </ion-badge>
+
+          </div>
+
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+
+
+    <!-- ========================= -->
+    <!-- SIN MEDICAMENTOS -->
+    <!-- ========================= -->
+
+    <div
+      *ngIf="medicamentos.length === 0"
+      class="empty-message"
+    >
+
+      <ion-icon
+        name="medkit-outline"
+      ></ion-icon>
+
+      <p>
+        No hay medicamentos para mostrar.
+      </p>
+
+    </div>
+
+  </div>
+
+</ion-content>

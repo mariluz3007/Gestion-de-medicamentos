@@ -1,0 +1,7 @@
+{
+  "name": "sistema-front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
